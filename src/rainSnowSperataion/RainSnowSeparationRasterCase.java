@@ -138,6 +138,7 @@ public class RainSnowSeparationRasterCase extends JGTModel {
 				// compute the rainfall and the snowfall according to Kavetski et al. (2006)
 				double rainfall=alfa_r*((precipitation/ Math.PI)* Math.atan((temperature - meltingTemperature) / m1)+precipitation/2);
 				double snowfall=alfa_s*(precipitation-rainfall);
+				snowfall=(snowfall<0)?0:snowfall;
 
 
 				RainIter.setSample(c, r, 0, rainfall);

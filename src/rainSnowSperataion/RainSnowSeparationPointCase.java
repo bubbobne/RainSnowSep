@@ -49,7 +49,7 @@ import com.vividsolutions.jts.geom.Geometry;
 
 
 @Description("The component separates the precipitation into rainfalla nd snowfall,"
-		+ "accordinf to Kavetski et al. (2006)")
+		+ "according to Kavetski et al. (2006)")
 @Author(name = "Marialaura Bancheri and Giuseppe Formetta", contact = "maryban@hotmail.it")
 @Keywords("Hydrology, Rain-snow separation point case")
 @Label(JGTConstants.HYDROGEOMORPHOLOGY)
@@ -65,7 +65,7 @@ public class RainSnowSeparationPointCase extends JGTModel {
 	@Description("The double value of the precipitation, once read from the HashMap")
 	double precipitation;
 
-	@Description("Alfa_r is the adjustment parameter for the precipitation measurements errors")
+	@Description("Alfa_r is the adjustment parameter for the rainfall measurements errors")
 	@In
 	public double alfa_r;
 
@@ -73,8 +73,7 @@ public class RainSnowSeparationPointCase extends JGTModel {
 	@In
 	public double alfa_s;
 
-	@Description("m1 is the smoothing parameter, for the detecting ot the rainfall in "
-			+ "the total precipitation")
+	@Description("m1 is the parameter controling the degree of smoothing")
 	@In
 	public double m1 = 1.0;
 
@@ -142,6 +141,7 @@ public class RainSnowSeparationPointCase extends JGTModel {
 			// compute the rainfall and the snowfall according to Kavetski et al. (2006)
 			double rainfall=alfa_r*((precipitation/ Math.PI)* Math.atan((temperature - meltingTemperature) / m1)+precipitation/2);
 			double snowfall=alfa_s*(precipitation-rainfall);
+			snowfall=(snowfall<0)?0:snowfall;
 			
 			storeResult_series((Integer)idStations[i],rainfall,  snowfall);
 
