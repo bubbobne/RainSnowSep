@@ -56,12 +56,6 @@ public class TestRainSnowSeprationPointCase extends HMTestCase {
 		OmsTimeSeriesIteratorReader airTReader = getTimeseriesReader(inPathToAirT, fId, startDate, endDate, timeStepMinutes);
 
 
-		OmsShapefileFeatureReader stationsReader = new OmsShapefileFeatureReader();
-		stationsReader.file = "resources/Input/stations.shp";
-		stationsReader.readFeatureCollection();
-		SimpleFeatureCollection stationsFC = stationsReader.geodata;
-
-
 
 		OmsTimeSeriesIteratorWriter writerRainfall = new OmsTimeSeriesIteratorWriter();
 		OmsTimeSeriesIteratorWriter writerSnowfall = new OmsTimeSeriesIteratorWriter();
@@ -79,8 +73,6 @@ public class TestRainSnowSeprationPointCase extends HMTestCase {
 
 
 		RainSnowSeparationPointCase separetor = new RainSnowSeparationPointCase();
-		separetor.inStations = stationsFC;
-		separetor.fStationsid = "Field2";
 
 		while( airTReader.doProcess) { 
 
