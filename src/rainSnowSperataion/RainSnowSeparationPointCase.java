@@ -79,6 +79,7 @@ public class RainSnowSeparationPointCase extends JGTModel {
 
 	@Description("The melting temperature")
 	@In
+	@Out
 	@Unit("C")
 	public double meltingTemperature;
 
