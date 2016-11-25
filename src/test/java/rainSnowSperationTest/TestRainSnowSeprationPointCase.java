@@ -42,8 +42,8 @@ public class TestRainSnowSeprationPointCase {
 	public void Test() throws Exception {
 
 
-		String startDate = "2007-10-17 00:00" ;
-		String endDate = "2007-10-18 00:00";
+		String startDate = "2008-08-14 23:00" ;
+		String endDate = "2008-08-15 23:00";
 		int timeStepMinutes = 60;
 		String fId = "ID";
 
