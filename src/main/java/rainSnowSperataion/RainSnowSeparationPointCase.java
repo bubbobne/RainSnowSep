@@ -36,8 +36,8 @@ import oms3.annotations.Status;
 import oms3.annotations.Unit;
 
 import org.geotools.feature.SchemaException;
-import org.jgrasstools.gears.libs.modules.JGTConstants;
-import org.jgrasstools.gears.libs.modules.JGTModel;
+import org.hortonmachine.gears.libs.modules.HMConstants;
+import org.hortonmachine.gears.libs.modules.HMModel;
 
 
 
@@ -45,11 +45,11 @@ import org.jgrasstools.gears.libs.modules.JGTModel;
 		+ "according to Kavetski et al. (2006)")
 @Author(name = "Marialaura Bancheri and Giuseppe Formetta", contact = "maryban@hotmail.it")
 @Keywords("Hydrology, Rain-snow separation point case")
-@Label(JGTConstants.HYDROGEOMORPHOLOGY)
+@Label(HMConstants.HYDROGEOMORPHOLOGY)
 @Name("Rain-snow separation point case")
 @Status(Status.CERTIFIED)
 @License("General Public License Version 3 (GPLv3)")
-public class RainSnowSeparationPointCase extends JGTModel {
+public class RainSnowSeparationPointCase extends HMModel {
 
 	@Description("The Hashmap with the time series of the precipitation values")
 	@In
