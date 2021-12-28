@@ -1,5 +1,5 @@
 /*
- * This file is part of JGrasstools (http://www.jgrasstools.org)
+ * This file is part of Horton Machine (http://www.hortomachine.org)
  * (C) HydroloGIS - www.hydrologis.com 
  * 
  * JGrasstools is free software: you can redistribute it and/or modify
@@ -21,8 +21,8 @@ package rainSnowSperationTest;
 
 import org.geotools.coverage.grid.GridCoverage2D;
 
-import org.jgrasstools.gears.io.rasterreader.OmsRasterReader;
-import org.jgrasstools.gears.io.rasterwriter.OmsRasterWriter;
+import org.hortonmachine.gears.io.rasterreader.OmsRasterReader;
+import org.hortonmachine.gears.io.rasterwriter.OmsRasterWriter;
 
 import org.junit.Test;
 
@@ -45,22 +45,16 @@ public class TestRainSnowSeprationRasterCase{
 
 		OmsRasterReader demReader = new OmsRasterReader();
 		demReader.file = "resources/Input/pit.asc";
-		demReader.fileNovalue = -9999.0;
-		demReader.geodataNovalue = Double.NaN;
 		demReader.process();
 		GridCoverage2D dem = demReader.outRaster;
 		
 		OmsRasterReader precipitationGridReader = new OmsRasterReader();
 		precipitationGridReader.file = "resources/Input/pit.asc";
-		precipitationGridReader.fileNovalue = -9999.0;
-		precipitationGridReader.geodataNovalue = Double.NaN;
 		precipitationGridReader.process();
 		GridCoverage2D precipitationGrid = precipitationGridReader.outRaster;
 		
 		OmsRasterReader temperatureGridReader = new OmsRasterReader();
 		temperatureGridReader.file = "resources/Input/pit.asc";
-		temperatureGridReader.fileNovalue = -9999.0;
-		temperatureGridReader.geodataNovalue = Double.NaN;
 		temperatureGridReader.process();
 		GridCoverage2D temperatureGrid = temperatureGridReader.outRaster;
 		
