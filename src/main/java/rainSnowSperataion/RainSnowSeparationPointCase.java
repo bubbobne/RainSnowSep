@@ -114,6 +114,7 @@ public class RainSnowSeparationPointCase extends HMModel {
 			// compute the rainfall and the snowfall according to Kavetski et al. (2006)
 			double rainfall=alfa_r*((precipitation/ Math.PI)* Math.atan((temperature - meltingTemperature) / m1)+precipitation/2);
 			double snowfall=alfa_s*(precipitation-rainfall);
+			rainfall=(rainfall<0)?0:rainfall;
 			snowfall=(snowfall<0)?0:snowfall;
 			
 			storeResult_series((Integer)ID,rainfall,  snowfall);

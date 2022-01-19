@@ -44,6 +44,7 @@ public class TestRainSnowSeprationPointCase {
 
 		String startDate = "2008-08-14 23:00" ;
 		String endDate = "2008-08-15 23:00";
+		
 		int timeStepMinutes = 60;
 		String fId = "ID";
 
