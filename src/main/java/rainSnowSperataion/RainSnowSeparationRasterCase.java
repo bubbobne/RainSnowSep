@@ -39,10 +39,10 @@ import oms3.annotations.Status;
 import oms3.annotations.Unit;
 
 import org.geotools.coverage.grid.GridCoverage2D;
-import org.jgrasstools.gears.libs.modules.JGTConstants;
-import org.jgrasstools.gears.libs.modules.JGTModel;
-import org.jgrasstools.gears.utils.RegionMap;
-import org.jgrasstools.gears.utils.coverage.CoverageUtilities;
+import org.hortonmachine.gears.libs.modules.HMConstants;
+import org.hortonmachine.gears.libs.modules.HMModel;
+import org.hortonmachine.gears.utils.RegionMap;
+import org.hortonmachine.gears.utils.coverage.CoverageUtilities;
 
 import com.vividsolutions.jts.geom.Coordinate;
 
@@ -51,11 +51,11 @@ import com.vividsolutions.jts.geom.Coordinate;
 		+ "accordinf to Kavetski et al. (2006)")
 @Author(name = "Marialaura Bancheri and Giuseppe Formetta", contact = "maryban@hotmail.it")
 @Keywords("Hydrology, Rain-snow separation")
-@Label(JGTConstants.HYDROGEOMORPHOLOGY)
+@Label(HMConstants.HYDROGEOMORPHOLOGY)
 @Name("Rain-snow separation raster case")
 @Status(Status.CERTIFIED)
 @License("General Public License Version 3 (GPLv3)")
-public class RainSnowSeparationRasterCase extends JGTModel {
+public class RainSnowSeparationRasterCase extends HMModel {
 
 	@Description("The map of the interpolated temperature.")
 	@In
@@ -121,8 +121,8 @@ public class RainSnowSeparationRasterCase extends JGTModel {
 		int rows = regionMap.getRows();
 
 		// create the output maps with the right dimensions
-		WritableRaster outRainfallWritableRaster= CoverageUtilities.createDoubleWritableRaster(cols, rows, null, null, null);
-		WritableRaster outSnowfallWritableRaster= CoverageUtilities.createDoubleWritableRaster(cols, rows, null, null, null);
+		WritableRaster outRainfallWritableRaster= CoverageUtilities.createWritableRaster(cols, rows, null, null, null);
+		WritableRaster outSnowfallWritableRaster= CoverageUtilities.createWritableRaster(cols, rows, null, null, null);
 
 		WritableRandomIter RainIter = RandomIterFactory.createWritable(outRainfallWritableRaster, null);
 		WritableRandomIter SnowIter = RandomIterFactory.createWritable(outSnowfallWritableRaster, null);

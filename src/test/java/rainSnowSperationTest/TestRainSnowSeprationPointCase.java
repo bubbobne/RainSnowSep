@@ -1,5 +1,5 @@
 /*
- * This file is part of JGrasstools (http://www.jgrasstools.org)
+ * This file is part of Horton Machine (http://www.hortonmachine.org)
  * (C) HydroloGIS - www.hydrologis.com 
  * 
  * JGrasstools is free software: you can redistribute it and/or modify
@@ -21,9 +21,9 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 
 import org.geotools.data.simple.SimpleFeatureCollection;
-import org.jgrasstools.gears.io.shapefile.OmsShapefileFeatureReader;
-import org.jgrasstools.gears.io.timedependent.OmsTimeSeriesIteratorReader;
-import org.jgrasstools.gears.io.timedependent.OmsTimeSeriesIteratorWriter;
+import org.hortonmachine.gears.io.shapefile.OmsShapefileFeatureReader;
+import org.hortonmachine.gears.io.timedependent.OmsTimeSeriesIteratorReader;
+import org.hortonmachine.gears.io.timedependent.OmsTimeSeriesIteratorWriter;
 import org.junit.*;
 
 
@@ -44,6 +44,7 @@ public class TestRainSnowSeprationPointCase {
 
 		String startDate = "2008-08-14 23:00" ;
 		String endDate = "2008-08-15 23:00";
+		
 		int timeStepMinutes = 60;
 		String fId = "ID";
 
