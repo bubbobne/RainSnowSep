@@ -1,4 +1,35 @@
-/bin/
+
 /.gradle/
-/build/
-/.settings/
+build/
+
+# Eclipse IDE files
+.settings/
+.project
+.classpath
+
+# Eclipse working directories
+.metadata/
+bin/
+tmp/
+*.tmp
+
+# Gradle files
+.gradle/
+build/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IntelliJ IDEA files (opzionale, se lavori anche con altri IDE)
+.idea/
+*.iml
+
+# Optional: escludi altri file temporanei
+*.swp
+*.swo
+*.bak
+*.orig
