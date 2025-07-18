@@ -18,7 +18,6 @@
  */
 package rainSnowSperataion;
 
-
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -38,8 +37,6 @@ import oms3.annotations.Unit;
 import org.geotools.feature.SchemaException;
 import org.hortonmachine.gears.libs.modules.HMConstants;
 import org.hortonmachine.gears.libs.modules.HMModel;
-
-
 
 @Description("The component separates the precipitation into rainfalla nd snowfall,"
 		+ "according to Kavetski et al. (2006)")
@@ -83,63 +80,55 @@ public class RainSnowSeparationPointCase extends HMModel {
 	@Unit("C")
 	public double meltingTemperature;
 
-	
 	@Description(" The output rainfall HashMap")
 	@Out
-	public HashMap<Integer, double[]> outRainfallHM= new HashMap<Integer, double[]>();;
+	public HashMap<Integer, double[]> outRainfallHM = new HashMap<Integer, double[]>();;
 
 	@Description(" The output snowfall HashMap")
 	@Out
-	public HashMap<Integer, double[]> outSnowfallHM= new HashMap<Integer, double[]>();;
-
-
+	public HashMap<Integer, double[]> outSnowfallHM = new HashMap<Integer, double[]>();;
 
 	@Execute
-	public void process() throws Exception { 
+	public void process() throws Exception {
 		checkNull(inPrecipitationValues);
 
-
-		// reading the ID of all the stations 
+		// reading the ID of all the stations
 		Set<Entry<Integer, double[]>> entrySet = inPrecipitationValues.entrySet();
 
 		for (Entry<Integer, double[]> entry : entrySet) {
-			
+
 			Integer ID = entry.getKey();
 
 			// read the input data for the given station
-			temperature=inTemperatureValues.get(ID)[0];
-			precipitation=inPrecipitationValues.get(ID)[0];
-
+			temperature = inTemperatureValues.get(ID)[0];
+			precipitation = inPrecipitationValues.get(ID)[0];
 
 			// compute the rainfall and the snowfall according to Kavetski et al. (2006)
-			double rainfall=alfa_r*((precipitation/ Math.PI)* Math.atan((temperature - meltingTemperature) / m1)+precipitation/2);
-			rainfall=(rainfall<0)?0:rainfall;
-			double snowfall=alfa_s*(precipitation-rainfall);
-			snowfall=(snowfall<0)?0:snowfall;
-			
-			storeResult_series((Integer)ID,rainfall,  snowfall);
+			double rainfall = ((precipitation / Math.PI) * Math.atan((temperature - meltingTemperature) / m1)
+					+ precipitation / 2);
+			rainfall = (rainfall < 0) ? 0 : rainfall;
+			double snowfall = alfa_s * (precipitation - rainfall);
+			snowfall = (snowfall < 0) ? 0 : snowfall;
+			rainfall = alfa_r * rainfall;
+			storeResult_series((Integer) ID, rainfall, snowfall);
 
 		}
 	}
 
-
-	
 	/**
 	 * Store result_series stores the results in the hashMaps .
 	 *
-	 * @param ID is the id of the station 
+	 * @param ID       is the id of the station
 	 * @param rainfall is the output rainfall
 	 * @param snowfall is the output snow
-	 * @throws SchemaException 
+	 * @throws SchemaException
 	 */
-	
-	private void storeResult_series(Integer ID,double rainfall, double snowfall) throws SchemaException {
 
+	private void storeResult_series(Integer ID, double rainfall, double snowfall) throws SchemaException {
 
-		outRainfallHM.put(ID, new double[]{rainfall});
+		outRainfallHM.put(ID, new double[] { rainfall });
 
-		outSnowfallHM.put(ID, new double[]{snowfall});
-
+		outSnowfallHM.put(ID, new double[] { snowfall });
 
 	}
 

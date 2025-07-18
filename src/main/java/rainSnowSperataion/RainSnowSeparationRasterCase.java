@@ -18,7 +18,6 @@
  */
 package rainSnowSperataion;
 
-
 import java.awt.image.RenderedImage;
 import java.awt.image.WritableRaster;
 import java.util.LinkedHashMap;
@@ -45,7 +44,6 @@ import org.hortonmachine.gears.utils.RegionMap;
 import org.hortonmachine.gears.utils.coverage.CoverageUtilities;
 
 import com.vividsolutions.jts.geom.Coordinate;
-
 
 @Description("The component separates the precipitation into rainfalla nd snowfall,"
 		+ "accordinf to Kavetski et al. (2006)")
@@ -79,17 +77,14 @@ public class RainSnowSeparationRasterCase extends HMModel {
 	@In
 	public double alfa_s;
 
-	@Description("m1 is the smoothing parameter, for the detecting ot the rainfall in "
-			+ "the total precipitation")
+	@Description("m1 is the smoothing parameter, for the detecting ot the rainfall in " + "the total precipitation")
 	@In
 	public double m1 = 1.0;
-
 
 	@Description("The melting temperature")
 	@In
 	@Unit("C")
 	public double meltingTemperature;
-
 
 	@Description("the linked HashMap with the coordinate of the stations")
 	LinkedHashMap<Integer, Coordinate> stationCoordinates;
@@ -106,14 +101,12 @@ public class RainSnowSeparationRasterCase extends HMModel {
 	@Out
 	public GridCoverage2D outSnowfallGrid = null;
 
-
-
 	@Execute
-	public void process() throws Exception { 
+	public void process() throws Exception {
 
 		// transform the GrifCoverage2D maps into writable rasters
-		WritableRaster temperatureMap=mapsReader(inTemperatureGrid);
-		WritableRaster precipitationMap=mapsReader(inPrecipitationGrid);
+		WritableRaster temperatureMap = mapsReader(inTemperatureGrid);
+		WritableRaster precipitationMap = mapsReader(inPrecipitationGrid);
 
 		// get the dimension of the maps
 		RegionMap regionMap = CoverageUtilities.getRegionParamsFromGridCoverage(inDem);
@@ -121,25 +114,27 @@ public class RainSnowSeparationRasterCase extends HMModel {
 		int rows = regionMap.getRows();
 
 		// create the output maps with the right dimensions
-		WritableRaster outRainfallWritableRaster= CoverageUtilities.createWritableRaster(cols, rows, null, null, null);
-		WritableRaster outSnowfallWritableRaster= CoverageUtilities.createWritableRaster(cols, rows, null, null, null);
+		WritableRaster outRainfallWritableRaster = CoverageUtilities.createWritableRaster(cols, rows, null, null, null);
+		WritableRaster outSnowfallWritableRaster = CoverageUtilities.createWritableRaster(cols, rows, null, null, null);
 
 		WritableRandomIter RainIter = RandomIterFactory.createWritable(outRainfallWritableRaster, null);
 		WritableRandomIter SnowIter = RandomIterFactory.createWritable(outSnowfallWritableRaster, null);
 
 		// iterate over the entire domain and compute for each pixel the SWE
-		for( int r = 1; r < rows - 1; r++ ) {
-			for( int c = 1; c < cols - 1; c++ ) {
+		for (int r = 1; r < rows - 1; r++) {
+			for (int c = 1; c < cols - 1; c++) {
 
-				// get the exact value of the variable in the pixel i, j 
-				precipitation=precipitationMap.getSampleDouble(c, r, 0);
-				temperature=temperatureMap.getSampleDouble(c, r, 0);
+				// get the exact value of the variable in the pixel i, j
+				precipitation = precipitationMap.getSampleDouble(c, r, 0);
+				temperature = temperatureMap.getSampleDouble(c, r, 0);
 
 				// compute the rainfall and the snowfall according to Kavetski et al. (2006)
-				double rainfall=alfa_r*((precipitation/ Math.PI)* Math.atan((temperature - meltingTemperature) / m1)+precipitation/2);
-				double snowfall=alfa_s*(precipitation-rainfall);
-				snowfall=(snowfall<0)?0:snowfall;
-
+				double rainfall = ((precipitation / Math.PI) * Math.atan((temperature - meltingTemperature) / m1)
+						+ precipitation / 2);
+				rainfall = (rainfall < 0) ? 0 : rainfall;
+				double snowfall = alfa_s * (precipitation - rainfall);
+				snowfall = (snowfall < 0) ? 0 : snowfall;
+				rainfall = alfa_r * rainfall;
 
 				RainIter.setSample(c, r, 0, rainfall);
 				SnowIter.setSample(c, r, 0, snowfall);
@@ -149,12 +144,13 @@ public class RainSnowSeparationRasterCase extends HMModel {
 
 		CoverageUtilities.setNovalueBorder(outRainfallWritableRaster);
 		CoverageUtilities.setNovalueBorder(outSnowfallWritableRaster);
-		outRainfallGrid = CoverageUtilities.buildCoverage("Rain", outRainfallWritableRaster, 
-				regionMap, inDem.getCoordinateReferenceSystem());
-		outSnowfallGrid = CoverageUtilities.buildCoverage("Snow", outSnowfallWritableRaster, 
-				regionMap, inDem.getCoordinateReferenceSystem());
+		outRainfallGrid = CoverageUtilities.buildCoverage("Rain", outRainfallWritableRaster, regionMap,
+				inDem.getCoordinateReferenceSystem());
+		outSnowfallGrid = CoverageUtilities.buildCoverage("Snow", outSnowfallWritableRaster, regionMap,
+				inDem.getCoordinateReferenceSystem());
 
 	}
+
 	/**
 	 * Maps reader transform the GrifCoverage2D in to the writable raster and
 	 * replace the -9999.0 value with no value.
@@ -162,14 +158,11 @@ public class RainSnowSeparationRasterCase extends HMModel {
 	 * @param inValues: the input map values
 	 * @return the writable raster of the given map
 	 */
-	private WritableRaster mapsReader ( GridCoverage2D inValues){	
+	private WritableRaster mapsReader(GridCoverage2D inValues) {
 		RenderedImage inValuesRenderedImage = inValues.getRenderedImage();
 		WritableRaster inValuesWR = CoverageUtilities.replaceNovalue(inValuesRenderedImage, -9999.0);
 		inValuesRenderedImage = null;
 		return inValuesWR;
 	}
-
-
-
 
 }
