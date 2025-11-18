@@ -16,9 +16,9 @@ $$
 
 | Symbol      | Meaning                                      | Unit                          |
 |-------------|----------------------------------------------|-------------------------------|
-| $$P(t) $$    | Precipitation at time *t*                    | mm·h⁻¹                        |
-| $$P_r(t)$$    | Rainfall at time *t*                         | mm·h⁻¹                        |
-| $$P_s(t)$$   | Snowfall at time *t*                         | mm·h⁻¹                        |
+| $$P(t) $$    | Precipitation at time *t*                    | [LT⁻¹]                        |
+| $$P_r(t)$$    | Rainfall at time *t*                         | [LT⁻¹]                        |
+| $$P_s(t)$$   | Snowfall at time *t*                         |  [LT⁻¹]                         |
 | $$α_r$$      | Adjustment coefficient for rain measurements | –                             |
 | $$α_s$$       | Adjustment coefficient for snow measurements | –                             |
 | $$m_1$$    | Smoothing degree parameter                   | –                             |
