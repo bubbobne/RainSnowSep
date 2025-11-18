@@ -22,8 +22,17 @@ $$
 | $$α_r$$      | Adjustment coefficient for rain measurements | –                             |
 | $$α_s$$       | Adjustment coefficient for snow measurements | –                             |
 | $$m_1$$    | Smoothing degree parameter                   | –                             |
+| $$T_s$$         | Threshold air temperature                  | [Θ]          |
+| $$T$$           | Temperature                                | [Θ]      |
 
 
+| Symbol | Meaning                   | Examples                          |
+| ------ | ------------------------- | --------------------------------- |
+| **L**  | Length                    | mm, m, km, water depth, elevation |
+| **T**  | Time                      | seconds, hours, days              |
+| **M**  | Mass                      | kg                                |
+| **Θ**  | Thermodynamic temperature | °C, K                             |
+| **–**  | Dimensionless quantity    | coefficients, ratios, fractions   |
 
 
 
