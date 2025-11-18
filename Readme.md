@@ -9,7 +9,7 @@ To separate rain and snow this model implemets the method reported in Formetta e
 $$
 \begin{cases}
 P_r(t) = \alpha_r \left( \dfrac{P(t)}{\pi}\,\arctan\!\left( \dfrac{T - T_s}{m_1} \right) + \dfrac{P}{2} \right) \\
-\\[-4pt]
+\\
 P_s(t) = \alpha_s \left( P(t) - P_r(t) \right)
 \end{cases}
 $$
@@ -18,7 +18,7 @@ $$
 |-------------|----------------------------------------------|-------------------------------|
 | `P(t)`      | Precipitation at time *t*                    | mm·h⁻¹                        |
 | `P_r(t)`    | Rainfall at time *t*                         | mm·h⁻¹                        |
-| `P_s(t)`    | Snowfall at time *t*                         | mm·h⁻¹                        |
+| `$$P_s$$(t)`    | Snowfall at time *t*                         | mm·h⁻¹                        |
 | `α_r`       | Adjustment coefficient for rain measurements | –                             |
 | `α_s`       | Adjustment coefficient for snow measurements | –                             |
 | `m_1`       | Smoothing degree parameter                   | –                             |
